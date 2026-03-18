@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Produto</title>
+    <title>Cadastrar Evento</title>
 </head>
 <body>
     
@@ -15,14 +15,14 @@
  <label for="descricao">Descrição: </label>
  <input type="text" name="descricao" required><br><br>
 
- <label for="quantidade">Quantidade: </label>
- <input type="number" name="quantidade" required><br><br>
+ <label for="horario">Horario: </label>
+ <input type="number" name="horario" required><br><br>
 
- <label for="codigo-barra">Codígo de Barras: </label>
- <input type="number" name="codigo-barra" required><br><br>
+ <label for="local">Codígo de Barras: </label>
+ <input type="number" name="local" required><br><br>
 
- <label for="preco">Preço: </label>
- <input type="number" name="preco" required><br><br>
+ <label for="numero">Preço: </label>
+ <input type="number" name="numero" required><br><br>
 
  <input type="submit">
 
@@ -33,20 +33,20 @@
 
 <?php
 
-require_once "C:/Turma1/xampp/htdocs/mvc/Controller/ProdutoController.php";
-require_once "C:/Turma1/xampp/htdocs/mvc/DB/Database.php";
+require_once "C:/Turma1/xampp/htdocs/MVC/Controller/EventoController.php";
+require_once "C:/Turma1/xampp/htdocs/MVC/DB/database.php";
 
-$ProdutoController = new ProdutoController ($pdo);
+$EventoController = new EventoController ($pdo);
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     $nome = $_POST['nome'];
     $descricao = $_POST['descricao'];
-    $quantidade = $_POST['quantidade'];
-    $codigo_barra = $_POST['codigo-barra'];
-    $preco = $_POST['preco'];
+    $horario = $_POST['horario'];
+    $local = $_POST['local'];
+    $numero = $_POST['numero'];
   
-    $ProdutoController -> cadastrarProduto($nome,$descricao,$quantidade,$codigo_barra,$preco);
+    $EventoController -> cadastrarEvento($nome,$descricao,$horario,$local,$numero);
     header('Location: ../../index.php');
   
   }

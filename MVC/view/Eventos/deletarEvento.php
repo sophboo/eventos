@@ -1,14 +1,14 @@
 <?php
 
-require_once "C:/Turma1/xampp/htdocs/mvc/DB/Database.php";
-require_once "C:/Turma1/xampp/htdocs/mvc/Controller/ProdutoController.php";
+require_once "C:/Turma1/xampp/htdocs/MVC/DB/database.php";
+require_once "C:/Turma1/xampp/htdocs/MVC/Controller/EventoController.php";
 
-$ProdutoController = new ProdutoController($pdo);
+$EventoController = new EventoController($pdo);
 
 if(isset($_GET['id'])){
 
     $id = $_GET['id'];
-    $produto = $ProdutoController->deletarProduto($id);
+    $Evento = $EventoController->deletarEvento($id);
     header('Location: ../../index.php');
 }else{
     header('Location: ../../index.php');
