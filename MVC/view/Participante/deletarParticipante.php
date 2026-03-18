@@ -1,14 +1,14 @@
 <?php
 
-require_once "C:/Turma1/xampp/htdocs/mvc/DB/Database.php";
-require_once "C:/Turma1/xampp/htdocs/mvc/Controller/UsuarioController.php";
+require_once "C:/Turma2/xampp/htdocs/eventos/MVC/DB/database.php";
+require_once "C:/Turma2/xampp/htdocs/eventos/MVC/controller/ParticipanteController.php";
 
-$UsuarioController = new UsuarioController($pdo);
+$ParticipanteController = new ParticipanteController($pdo);
 
 if(isset($_GET['id'])){
 
     $id = $_GET['id'];
-    $usuario = $UsuarioController->deletar($id);
+    $Participante = $ParticipanteController->deletar($id);
     header('Location: ../../index.php');
 }else{
     header('Location: ../../index.php');

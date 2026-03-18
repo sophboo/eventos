@@ -3,52 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Evento</title>
+    <title>Cadastrar Usuário</title>
 </head>
 <body>
-    
- <form method="post">
+    <form method="post">
+       <label for="evento">Evento:</label>
+       <input type="text" name="evento" required><br> 
+       
+       <label for="descricao">Descrição:</label>
+       <input type="text" name="descricao" required><br> 
+       
+       <label for="data">Data:</label>
+       <input type="date" name="data" required><br> 
 
- <label for="nome">Nome: </label>
- <input type="text" name="nome" required><br><br>
+       <label for="horario">Horário:</label>
+       <input type="time" name="horario" required><br> 
+       
+       <label for="local">Local:</label>
+       <input type="text" name="local" required><br> 
+       
+       <label for="maximodeparticipantes">Número máximo de Participantes:</label>
+       <input type="number" name="maximodeparticipantes" required><br> 
+       
 
- <label for="descricao">Descrição: </label>
- <input type="text" name="descricao" required><br><br>
-
- <label for="horario">Horario: </label>
- <input type="number" name="horario" required><br><br>
-
- <label for="local">Codígo de Barras: </label>
- <input type="number" name="local" required><br><br>
-
- <label for="numero">Preço: </label>
- <input type="number" name="numero" required><br><br>
-
- <input type="submit">
-
- </form>
-
+       <input type="submit">
+    </form>
 </body>
 </html>
 
 <?php
 
-require_once "C:/Turma1/xampp/htdocs/MVC/Controller/EventoController.php";
-require_once "C:/Turma1/xampp/htdocs/MVC/DB/database.php";
+require_once "C:/Turma2/xampp/htdocs/Eventos/DB/Database.php";
+require_once "C:/Turma2/xampp/htdocs/Eventos/Controller/EventosController.php";
 
-$EventoController = new EventoController ($pdo);
+$EventosController = new EventosController($pdo);
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
-    $nome = $_POST['nome'];
+    $evento = $_POST['evento'];
     $descricao = $_POST['descricao'];
+    $data = $_POST['data'];
     $horario = $_POST['horario'];
     $local = $_POST['local'];
-    $numero = $_POST['numero'];
-  
-    $EventoController -> cadastrarEvento($nome,$descricao,$horario,$local,$numero);
-    header('Location: ../../index.php');
-  
-  }
+    $maximodeparticipantes = $_POST['maximodeparticipantes']; 
 
-?>
+    if($EventosController->cadastrar($evento, $descricao, $data, $horario, $local, $maximodeparticipantes) === true){
+    header('Location: ../../index.php');
+    } else {
+        echo "erro ao cadatrar";
+    }
+}
+

@@ -1,65 +1,61 @@
 <?php
 
-require_once "C:/Turma1/xampp/htdocs/MVC/DB/database.php";
-require_once "C:/Turma1/xampp/htdocs/MVC/Controller/EventoController.php";
+require_once "C:/xampp/htdocs/mvc/DB/Database.php";
+require_once "C:\Turma2\xampp\htdocs\Eventos\Controller\EventosController.php";
 
-$EventoController = new EventoController($pdo);
+$UsuarioController = new EventosController($pdo);
 
 if(isset($_GET['id'])){
-
     $id = $_GET['id'];
-    $usuario = $EventoController->buscarEvento($id);
-
+    $usuario = $UsuarioController->buscarEventos($id);
 ?>
-
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Evento</title>
+    <title>Editar Usuário</title>
 </head>
 <body>
-    
-<form method="post">
+    <form method="post">
+       <label for="evento">Evento:</label>
+       <input type="text" name="text" value="<?=$Eventos['evento'];?>" required><br> 
+       
+       <label for="descricao">Descrição:</label>
+       <input type="text" name="text" value="<?=$Eventos['descricao'];?>" required><br> 
+       
+       <label for="data">Data:</label>
+       <input type="date" name="data" value="<?=$Eventos['data'];?>" required><br> 
 
- <label for="nome">Nome: </label>
- <input type="text" name="nome" required><br><br>
+       <label for="horario">Horário:</label>
+       <input type="time" name="horario" value="<?=$Eventos['horario'];?>" required><br> 
 
- <label for="descricao">Descrição: </label>
- <input type="text" name="descricao" required><br><br>
+       <label for="local">Local</label>
+       <input type="text" name="local" value="<?=$Eventos['local'];?>" required><br> 
 
- <label for="horario">Horario: </label>
- <input type="number" name="horario" required><br><br>
+       <label for="maximodeparticipante">Máximo de participantes:</label>
+       <input type="text" name="maximodeparticipantes" value="<?=$Eventos['maximodeparticipantes'];?>" required><br> 
 
- <label for="local">Codígo de Barras: </label>
- <input type="number" name="local" required><br><br>
 
- <label for="numero">Preço: </label>
- <input type="number" name="numero" required><br><br>
-
- <input type="submit">
-
-</form>
-
+       <input type="submit">
+    </form>
 </body>
 </html>
-
 <?php
-}else{
+} else {
     header('Location: listar.php');
 }
 
-if($_SERVER['REQUEST_METHOD']=='POST'){
-
-   $nome = $_POST['nome'];
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $evento = $_POST['evento'];
     $descricao = $_POST['descricao'];
+    $data = $_POST['data'];
     $horario = $_POST['horario'];
     $local = $_POST['local'];
-    $numero = $_POST['numero'];
-  
-    $EventoController -> editarEvento($nome,$descricao,$quantidade,$local,$preco, $id);
+    $maximodeparticipantes = $_POST['maximodeparticipantes'];
+
+    $EventosController->editar($evento, $descricao, $data, $data, $horario, $local, $maximodeparticipantes, $id);
+
     header('Location: ../../index.php');
 }
 

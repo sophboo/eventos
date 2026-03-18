@@ -1,47 +1,43 @@
 <?php
-
-class UsuarioModel {
+class ParticipantesModel {
     private $pdo;
-
     public function __construct(PDO $pdo){
         $this->pdo = $pdo;
     }
 
     public function buscarTodos(){
-        $stmt = $this->pdo->query('SELECT * FROM usuarios');
+        $stmt = $this->pdo->query("SELECT * FROM participantes");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    public function cadastrar ($nome, $telefone, $email, $senha){
-        $sql = "INSERT INTO usuarios (nome, telefone, email, senha) VALUES (:nome, :telefone, :email, :senha)";
-        $stmt = $this ->pdo->prepare($sql);
-        return $stmt->execute([
-            ':nome'=> $nome,
-            ':telefone'=> $telefone,
-            ':email'=> $email,
-            ':senha'=> $senha
-        ]);
-    }
-
-    public function buscarUsuario($id){
-        $stmt = $this->pdo->query("SELECT * FROM usuarios WHERE id = $id");
+    
+    public function buscarParticipantes($id){
+        $stmt = $this->pdo->query("SELECT * FROM participantes WHERE id = $id");
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function editar ($nome, $telefone, $email, $senha){
-        $sql = "UPDATE usuarios SET nome=?, telefone=?, email=?, senha=? WHERE id=?";
+    public function cadastrar($nome, $email, $telefone) {
+        $sql = "INSERT INTO participantes  (nome, email, telefone)
+        VALUES (:nome, :email, :telefone)"; ;
+        
+       
         $stmt = $this->pdo->prepare($sql);
-        return$stmt->execute([$nome, $telefone, $email, $senha]);
+        return $stmt->execute([
+            ':nome' => $nome,
+            ':email' => $email,
+            ':telefone' => $telefone
+
+        ]);
+    }
+    public function editar($nome, $email, $telefone, $id) {
+        $sql = "UPDATE participantes SET nome=?, email=?, telefone=? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([ $id, $nome, $email, $telefone]);
     }
 
-    
-    public function deletar ($id){
-        $sql = "DELETE FROM usuarios WHERE id = ?";
-        $stmt = $this ->pdo->prepare($sql);
+    public function deletar($id) {
+        $sql = "DELETE FROM participantes WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([$id]);
     }
-
     
 }
-
-?>

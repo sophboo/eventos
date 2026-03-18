@@ -1,37 +1,34 @@
 <?php
 
-require_once "C:/Turma1/xampp/htdocs/mvc/DB/Database.php";
-require_once "C:/Turma1/xampp/htdocs/mvc/Controller/UsuarioController.php";
+require_once "C:/Turma2/xampp/htdocs/eventos/MVC/DB/database.php";
+require_once "C:/Turma2/xampp/htdocs/eventos/MVC/controller/ParticipanteController.php";
 
-$UsuarioController = new UsuarioController($pdo);
+$ParticipanteController = new ParticipanteController($pdo);
 
+// 👉 PEGAR DADOS DO PARTICIPANTE
 if(isset($_GET['id'])){
-
     $id = $_GET['id'];
-    $usuario = $UsuarioController->buscarUsuario($id);
-
+    $Participante = $ParticipanteController->buscarParticipante($id);
+}else{
+    header('Location: ../../index.php');
+    exit;
+}
 
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Usuario</title>
-</head>
+<html>
 <body>
-    
+
 <form method="post">
 
-    <label for="nome">Nome: </label>
-    <input type="text" name="nome" value="<?=$usuario['nome'];?>" required><br><br>
+    <input type="text" name="nome" value="<?=$Participante['nome'];?>" required><br><br>
 
-    <label for="email">Email: </label>
-    <input type="email" name="email" value="<?=$usuario['email'];?>" required><br><br>
+    <input type="text" name="telefone" value="<?=$Participante['telefone'];?>" required><br><br>
 
-     <label for="senha">Senha: </label>
-    <input type="password" name="senha" value="<?=$usuario['senha'];?>" required><br><br>
+    <input type="email" name="email" value="<?=$Participante['email'];?>" required><br><br>
+
+    <input type="password" name="senha" value="<?=$Participante['senha'];?>" required><br><br>
 
     <input type="submit">
 
@@ -42,18 +39,18 @@ if(isset($_GET['id'])){
 
 <?php
 
-}else{
-    header('Location: listar.php');
-}
 
-if($_SERVER['REQUEST_METHOD']=='POST'){
+
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $nome = $_POST['nome'];
+    $telefone = $_POST['telefone'];
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    $UsuarioController->editar($nome, $email, $senha, $id);
+    $ParticipanteController->editarParticipante($nome, $telefone, $email, $senha, $id);
 
     header('Location: ../../index.php');
+    exit;
 }
 
 ?>

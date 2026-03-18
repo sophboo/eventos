@@ -1,18 +1,21 @@
 <?php
 
-require_once "DB/database.php";
-require_once "Controller/ParticipanteController.php";
-require_once "Controller/EventoController.php";
-require_once "Controller/PagamentoController.php";
+require_once "C:/Turma2/xampp/htdocs/eventos/MVC/controller/ParticipanteController.php";
+require_once "C:/Turma2/xampp/htdocs/eventos/MVC/controller/EventoController.php";
 
-$ParticipanteController = new ParticipanteController($pdo);
-$Participantes = $ParticipanteController->listarParticipante();
 
-$EventoController = new EventoController($pdo);
-$Evento = $EventoController->listarEvento();
+require_once "C:/Turma2/xampp/htdocs/eventos/MVC/DB/database.php";
 
-$PagamentoController = new PagamentoController($pdo);
-$pagamentos = $PagamentoController->listarPagamento($pdo);
+$pagina = 'participante';
+$acao = 'listar';
+
+$controllerName = ucfirst($pagina) . "Controller";
+
+require_once "C:/Turma2/xampp/htdocs/eventos/MVC/controller/$controllerName.php";
+
+$controller = new $controllerName($pdo);
+$controller->$acao();
+
 
 ?>
 

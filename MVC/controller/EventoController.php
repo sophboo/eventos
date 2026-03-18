@@ -1,39 +1,35 @@
 <?php
+require_once "C:/Turma2/xampp/htdocs/Eventos/Model/EventosModel.php";
+class EventosController {
+    private $EventosModel;
+   
+    public function __construct($pdo) {
+        $this->EventosModel = new EventosModel($pdo);
 
-require_once "C:/Turma1/xampp/htdocs/mvc/Model/ProdutoModel.php";
-
-class EventoController{
-
-    private $EventoModel;
-
-    public function __construct($pdo){
-        $this->EventoModel = new EventoModel( $pdo);
+    }
+    public function listar() {
+        $eventos = $this->EventosModel->buscarTodos();
+        include_once "C:/Turma2/xampp/htdocs/Eventos/View/Eventos/listar.php";
     }
 
-    public function listarEvento (){
-        $Eventos = $this->EventoModel->buscarTodos();
-        include_once "C:/Turma1/xampp/htdocs/mvc/View/Evento/listarEvento.php";
-        return;
-    }
-    public function cadastrarEvento ($id, $nome, $descricao, $horario, $local, $numero){
-        return $this->EventoModel-> cadastrarEvento($id, $nome, $descricao, $horario, $local, $numero);
+    public function buscarEventos($id){
+        $Eventos = $this->EventosModel->buscarEventos($id);
+        return $Eventos;
     }
 
-    public function editarEvento ($nome, $descricao, $horario, $local, $numero, $id){
-        $this->EventoModel->editarEvento( $nome, $descricao, $horario, $local, $numero, $id);
-    }   
-
-    public function buscarEvento($id){
-        return $this->EventoModel->buscarEvento($id); 
+    public function cadastrar($evento, $descricao, $data, $horario, $local, $maximodeparticipantes){
+        $this->EventosModel->cadastrar($evento, $descricao, $data, $horario, $local, $maximodeparticipantes);
+        return true;
     }
-
-    public function deletarEvento ($id){
-        $Evento = $this->EventoModel->deletarEvento($id); 
-        return $Evento;
+    
+    public function editar($evento, $descricao, $data, $horario, $local, $maximodeparticipantes, $id){
+        $this->EventosModel->editar($evento, $descricao, $data, $horario, $local, $maximodeparticipantes, $id);
 
     }
 
+    public function deletar($id){
+        $Eventos = $this->EventosModel->deletar($id);
+        return $Eventos;
+    }
 
 }
-
-?>
