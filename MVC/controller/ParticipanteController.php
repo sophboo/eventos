@@ -1,35 +1,35 @@
 <?php
 
-require_once "C:/Turma1/xampp/htdocs/mvc/Model/UsuarioModel.php";
+require_once "C:/Turma1/xampp/htdocs/mvc/Model/ParticipanteModel.php";
 
-class UsuarioController {
-    private $usuarioModel;
+class ParticipanteController {
+    private $ParticipanteModel;
 
     public function __construct($pdo){
-        $this->usuarioModel = new UsuarioModel( $pdo);
+        $this->ParticipanteModel = new ParticipanteModel( $pdo);
     }
 
     public function listar (){
-        $usuarios = $this->usuarioModel->buscarTodos();
-        include_once "C:/Turma1/xampp/htdocs/mvc/View/Usuario/listar.php";
+        $Participantes = $this->ParticipanteModel->buscarTodos();
+        include_once "C:/Turma1/xampp/htdocs/mvc/View/Participante/listar.php";
         return;
     }
 
-    public function cadastrar ($nome, $email, $senha){
-        return $this->usuarioModel-> cadastrar($nome, $email, $senha);
+    public function cadastrarParticipante ($nome, $telefone, $email, $senha){
+        return $this->ParticipanteModel-> cadastrarParticipante($nome, $telefone, $email, $senha);
     }
 
-    public function editar ($nome, $email, $senha, $id){
-        $this->usuarioModel->editar($nome, $email, $senha, $id);
+    public function editarParticipante ($nome, $telefone, $email, $senha, $id){
+        $this->ParticipanteModel->editarParticipante($nome, $telefone, $email, $senha, $id);
     }   
 
-    public function buscarUsuario($id){
-        return $this->usuarioModel->buscarUsuario($id); 
+    public function buscarParticipante($id){
+        return $this->ParticipanteModel->buscarParticipante($id); 
     }
 
     public function deletar ($id){
-        $usuario = $this->usuarioModel->deletar($id); 
-        return $usuario;
+        $Participante = $this->ParticipanteModel->deletarParticipante($id); 
+        return $Participante;
 
     }
 
