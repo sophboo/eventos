@@ -1,35 +1,35 @@
 <?php
 
-require_once "C:/Turma1/xampp/htdocs/mvc/Model/PagamentoModel.php";
+require_once "C:/Turma1/xampp/htdocs/mvc/Model/InscricaoModel.php";
 
-class PagamentoController{
+class InscricaoController{
 
-    private $PagamentoModel;
+    private $InscricaoModel;
 
     public function __construct($pdo){
-        $this->PagamentoModel = new PagamentoModel( $pdo);
+        $this->InscricaoModel = new InscricaoModel( $pdo);
     }
 
-    public function listarPagamento (){
-        $pagamentos = $this->PagamentoModel->buscarTodos();
-        include_once "C:/Turma1/xampp/htdocs/mvc/View/Pagamento/listarPagamento.php";
+    public function listarInscricao (){
+        $Inscricaos = $this->InscricaoModel->buscarTodos();
+        include_once "C:/Turma1/xampp/htdocs/mvc/view/Inscricao/listarInscricao.php";
         return;
     }
-    public function cadastrarPagamento ($nome, $tipo){
-        return $this->PagamentoModel-> cadastrarPagamento($nome,$tipo);
+    public function cadastrarInscricao ($nome, $tipo){
+        return $this->InscricaoModel-> cadastrarInscricao($nome,$tipo);
     }
 
-    public function editarPagamento ($nome, $tipo, $id){
-        $this->PagamentoModel->editarPagamento($nome, $tipo, $id);
+    public function editarInscricao ($nome, $tipo, $id){
+        $this->InscricaoModel->editarInscricao($nome, $tipo, $id);
     }   
 
-    public function buscarPagamento($id){
-        return $this->PagamentoModel->buscarPagamento($id); 
+    public function buscarInscricao($id){
+        return $this->InscricaoModel->buscarInscricao($id); 
     }
 
-    public function deletarPagamento ($id){
-        $pagamento = $this->PagamentoModel->deletarPagamento($id); 
-        return $pagamento;
+    public function deletarInscricao ($id){
+        $Inscricao = $this->InscricaoModel->deletarInscricao($id); 
+        return $Inscricao;
 
     }
 
