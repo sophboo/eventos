@@ -2,34 +2,34 @@
 
 require_once "C:/Turma1/xampp/htdocs/mvc/Model/ProdutoModel.php";
 
-class ProdutoController{
+class EventoController{
 
-    private $ProdutoModel;
+    private $EventoModel;
 
     public function __construct($pdo){
-        $this->ProdutoModel = new ProdutoModel( $pdo);
+        $this->EventoModel = new EventoModel( $pdo);
     }
 
-    public function listarProduto (){
-        $produtos = $this->ProdutoModel->buscarTodos();
-        include_once "C:/Turma1/xampp/htdocs/mvc/View/Produto/listarProduto.php";
+    public function listarEvento (){
+        $Eventos = $this->EventoModel->buscarTodos();
+        include_once "C:/Turma1/xampp/htdocs/mvc/View/Evento/listarEvento.php";
         return;
     }
-    public function cadastrarProduto ($nome, $descricao, $quantidade, $codigo_barra, $preco){
-        return $this->ProdutoModel-> cadastrarProduto($nome, $descricao, $quantidade, $codigo_barra, $preco);
+    public function cadastrarEvento ($id, $nome, $descricao, $horario, $local, $numero){
+        return $this->EventoModel-> cadastrarEvento($id, $nome, $descricao, $horario, $local, $numero);
     }
 
-    public function editarProduto ($nome, $descricao, $quantidade, $codigo_barra, $preco, $id){
-        $this->ProdutoModel->editarProduto($nome, $descricao, $quantidade, $codigo_barra, $preco, $id);
+    public function editarEvento ($nome, $descricao, $horario, $local, $numero, $id){
+        $this->EventoModel->editarEvento( $nome, $descricao, $horario, $local, $numero, $id);
     }   
 
-    public function buscarProduto($id){
-        return $this->ProdutoModel->buscarProduto($id); 
+    public function buscarEvento($id){
+        return $this->EventoModel->buscarEvento($id); 
     }
 
-    public function deletarProduto ($id){
-        $produto = $this->ProdutoModel->deletarProduto($id); 
-        return $produto;
+    public function deletarEvento ($id){
+        $Evento = $this->EventoModel->deletarEvento($id); 
+        return $Evento;
 
     }
 
