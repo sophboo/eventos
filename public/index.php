@@ -20,9 +20,6 @@ $controller->$acao();
 ?>
 
 
-
-
-
 <?php
 
 $pagina = $_GET['pagina'] ?? 'resultado';
