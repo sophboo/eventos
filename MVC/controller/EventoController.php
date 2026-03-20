@@ -1,34 +1,33 @@
 <?php
-require_once "C:/Turma2/xampp/htdocs/Eventos/Model/EventosModel.php";
-class EventosController {
-    private $EventosModel;
+require_once "C:/Turma2/xampp/htdocs/eventos/MVC/model/EventoModel.php";
+class EventoController {
+    private $EventoModel;
    
     public function __construct($pdo) {
-        $this->EventosModel = new EventosModel($pdo);
+        $this->EventoModel = new EventoModel($pdo);
 
     }
     public function listar() {
-        $eventos = $this->EventosModel->buscarTodos();
-        include_once "C:/Turma2/xampp/htdocs/Eventos/View/Eventos/listar.php";
+        $eventos = $this->EventoModel->buscarTodos();
+        include_once "C:/Turma2/xampp/htdocs/eventos/MVC/view/Eventos/listarEvento.php";
     }
 
     public function buscarEventos($id){
-        $Eventos = $this->EventosModel->buscarEventos($id);
+        $Eventos = $this->EventoModel->buscarEventos($id);
         return $Eventos;
     }
 
-    public function cadastrar($evento, $descricao, $data, $horario, $local, $maximodeparticipantes){
-        $this->EventosModel->cadastrar($evento, $descricao, $data, $horario, $local, $maximodeparticipantes);
+    public function cadastrarEvento( $nome, $descricao, $horario, $local, $numero, $data){
+        $this->EventoModel->cadastrarEvento( $nome, $descricao, $horario, $local, $numero, $data);
         return true;
     }
     
-    public function editar($evento, $descricao, $data, $horario, $local, $maximodeparticipantes, $id){
-        $this->EventosModel->editar($evento, $descricao, $data, $horario, $local, $maximodeparticipantes, $id);
+    public function editarEvento($id, $nome, $descricao, $horario, $local, $numero, $data){
+    $this->EventoModel->editar($id, $nome, $descricao, $horario, $local, $numero, $data);
+}
 
-    }
-
-    public function deletar($id){
-        $Eventos = $this->EventosModel->deletar($id);
+    public function deletarEvento($id){
+        $Eventos = $this->EventoModel->deletarEvento($id);
         return $Eventos;
     }
 

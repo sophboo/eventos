@@ -1,15 +1,15 @@
 <?php
 
-require_once "C:/xampp/htdocs/mvc/DB/Database.php";
-require_once "C:/xampp/htdocs/mvc/Controller/EventosController.php";
+require_once "C:/Turma2/xampp/htdocs/eventos/MVC/DB/database.php";
+require_once "C:/Turma2/xampp/htdocs/eventos/MVC/controller/EventoController.php";
 
-$EventosController = new EventosController($pdo);
+$EventoController = new EventoController($pdo);
 
 if(isset($_GET['id'])){
     $id = $_GET['id'];
-    $Eventos = $EventosController->deletar($id);
-    header('Location: ../../index.php');
+   $EventoController->deletarEvento($id);
+    header('Location: ../../../public/index.php');
 } else {
-    header('Location: ../../index.php');
+    header('Location: ../../../public/index.php');
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-class ParticipantesModel {
+class ParticipanteModel {
     private $pdo;
     public function __construct(PDO $pdo){
         $this->pdo = $pdo;
@@ -10,28 +10,26 @@ class ParticipantesModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function buscarParticipantes($id){
+    public function buscarParticipante($id){
         $stmt = $this->pdo->query("SELECT * FROM participantes WHERE id = $id");
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function cadastrar($nome, $email, $telefone) {
-        $sql = "INSERT INTO participantes  (nome, email, telefone)
-        VALUES (:nome, :email, :telefone)"; ;
+    public function cadastrar($nome, $telefone, $email) {
+        $sql = "INSERT INTO participantes (nome, telefone, email) VALUES (:nome, :telefone, :email)";
         
-       
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
             ':nome' => $nome,
-            ':email' => $email,
-            ':telefone' => $telefone
-
+            ':telefone' => $telefone,
+            ':email' => $email
         ]);
     }
-    public function editar($nome, $email, $telefone, $id) {
-        $sql = "UPDATE participantes SET nome=?, email=?, telefone=? WHERE id = ?";
+
+    public function editar($nome, $telefone, $email, $id) {
+        $sql = "UPDATE participantes SET nome=?, telefone=?, email=? WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([ $id, $nome, $email, $telefone]);
+        return $stmt->execute([$nome, $telefone, $email, $id]);
     }
 
     public function deletar($id) {

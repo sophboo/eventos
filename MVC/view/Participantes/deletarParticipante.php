@@ -6,12 +6,10 @@ require_once "C:/Turma2/xampp/htdocs/eventos/MVC/controller/ParticipanteControll
 $ParticipanteController = new ParticipanteController($pdo);
 
 if(isset($_GET['id'])){
-
     $id = $_GET['id'];
-    $Participante = $ParticipanteController->deletar($id);
-    header('Location: ../../index.php');
-}else{
-    header('Location: ../../index.php');
+    $Participantes = $ParticipanteController->deletar($id);
+    header('Location: ../../../public/index.php');
+} else {
+    header('Location: ../../../public/index.php');
 }
-
 ?>
